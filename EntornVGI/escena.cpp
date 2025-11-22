@@ -391,6 +391,8 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		draw_TriEBO_Object(GLU_SPHERE); //gluSphere(1.0, 20, 20);
 		break;
 
+	
+
 // Dibuix de la resta d'objectes
 	default:
 		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
@@ -434,6 +436,10 @@ void dibuixa(GLuint sh_programID, char obj, glm::mat4 MatriuVista, glm::mat4 Mat
 		NormalMatrix = transpose(inverse(MatriuVista * ModelMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 		draw_TriEBO_Object(GLUT_CUBE_RGB);	//draw_TriVAO_Object(GLUT_CUBE_RGB); // glutSolidCubeRGB(1.0);
+		break;
+
+	case CAMIO:
+		camio(sh_programID, MatriuVista, MatriuTG, sw_mat);
 		break;
 
 // Esfera
@@ -1264,5 +1270,62 @@ void Cabina(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_m
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 	draw_TriEBO_Object(GLUT_USER5); //gluCylinder(1.5f, 4.5f, 2.0f, 8, 1);
 	//glPopMatrix();
+}
+// -----------------------------------------------------------------------------
+//  Objecte CAMIÓ: cos, cabina i quatre rodes. S'assumeix que el pla Z=0 és el terra.
+// -----------------------------------------------------------------------------
+void camio(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
+{
+	CColor col_object;
+	glm::mat4 NormalMatrix(1.0f), ModelMatrix(1.0f);
+
+	// 1. Cos del camió (paral·lelepípede 5×2×2 de color gris)
+	//    L’eix Y és el llargada, l’eix X l’amplada, i l’eix Z l’alçada.
+	col_object.r = 0.5f; col_object.g = 0.5f; col_object.b = 0.5f; col_object.a = 1.0f;
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+
+	// Translació: elevem el cos a la meitat de l’alçada de les rodes (0.1) + meitat de l’alçada (2/2 = 1.0) = 1.1.
+	// Escalat: (amplada, llargada, alçada) = (2, 5, 2).
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, 0.55f)); // 1.1/2 perquè després multiplicarem per l’escalat
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(2.0f, 5.0f, 2.0f));
+	// Enviem matrices al shader
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	draw_TriEBO_Object(GLUT_CUBE);
+
+	// 2. Cabina del conductor (cub de costat 1, color blau/verd clar)
+	col_object.r = 0.0f; col_object.g = 0.7f; col_object.b = 0.7f; col_object.a = 1.0f;
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+
+	// Translació: col·loquem la cabina davant del cos (+3 en Y, que és 2.5 + 0.5) i a 0.5 en Z per posar-la sobre el terra.
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 3.0f, 0.5f));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.0f, 1.0f, 1.0f)); // Cub de 1×1×1
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	draw_TriEBO_Object(GLUT_CUBE);
+
+	// 3. Rodes (quatre torus de radi exterior 0.2 i radi interior 0.1, color gris clar)
+	col_object.r = 0.7f; col_object.g = 0.7f; col_object.b = 0.7f; col_object.a = 1.0f;
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+
+	// Coordenades (x, y) de cada roda respecte al centre del cos
+	float rodaPos[4][2] = {
+		{  0.7f,  2.0f },  // roda davantera dreta
+		{ -0.7f,  2.0f },  // roda davantera esquerra
+		{  0.7f, -2.0f },  // roda posterior dreta
+		{ -0.7f, -2.0f }   // roda posterior esquerra
+	};
+	for (int i = 0; i < 4; i++)
+	{
+		// Situem la roda a la seva posició XY. L’altura és z=0 (toca el terra).
+		ModelMatrix = glm::translate(MatriuTG, glm::vec3(rodaPos[i][0], rodaPos[i][1], 0.0f));
+		// IMPORTANT: aquí no fem escalat perquè el radi s’especifica a l’EBO; tampoc rotem el torus (acceptem rodes “plans”)
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+		draw_TriEBO_Object(GLUT_TORUS);
+	}
 }
 // FI OBJECTE TIE: FETS PER ALUMNES -----------------------------------------------------------------

@@ -92,6 +92,9 @@ BEGIN_MESSAGE_MAP(CEntornVGIView, CView)
 	ON_UPDATE_COMMAND_UI(ID_OBJECTE_ESFERA, &CEntornVGIView::OnUpdateObjecteEsfera)
 	ON_COMMAND(ID_OBJECTE_TETERA, &CEntornVGIView::OnObjecteTetera)
 	ON_UPDATE_COMMAND_UI(ID_OBJECTE_TETERA, &CEntornVGIView::OnUpdateObjecteTetera)
+	//Objeto Camión:
+	ON_COMMAND(ID_OBJECTE_CAMIO, &CEntornVGIView::OnObjecteCamio)
+	ON_UPDATE_COMMAND_UI(ID_OBJECTE_CAMIO, &CEntornVGIView::OnUpdateObjecteCamio)
 	ON_COMMAND(ID_TRANSFORMA_TRASLACIO, &CEntornVGIView::OnTransformaTraslacio)
 	ON_UPDATE_COMMAND_UI(ID_TRANSFORMA_TRASLACIO, &CEntornVGIView::OnUpdateTransformaTraslacio)
 	ON_COMMAND(ID_TRANSFORMA_ORIGENTRASLACIO, &CEntornVGIView::OnTransformaOrigentraslacio)
@@ -4149,6 +4152,35 @@ void CEntornVGIView::OnUpdateObjecteTetera(CCmdUI *pCmdUI)
 // TODO: Agregue aquí su código de controlador de IU para actualización de comandos
 	if (objecte == TETERA) pCmdUI->SetCheck(1);
 		else pCmdUI->SetCheck(0);
+}
+
+// OBJECTE: Camió
+void CEntornVGIView::OnObjecteCamio()
+{
+	objecte = CAMIO;
+
+	// Càlcul de la mida i distància de la càmera segons la diagonal del camió
+	// cos: 5 (llarg), 2 (ample), 2 (alç), cabina: 1; diagonal ≈ sqrt(36 + 4 + 4) = 6.63
+	const double diag = 6.63;    // aproximació de la diagonal total
+	const double factor = 1.5;     // marge de seguretat
+	mida = diag;
+	OPV.R = factor * diag;
+
+	// Carreguem VAOs necessaris: cub i torus
+	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hrc);
+	netejaVAOList();
+	// Els colors es definiran amb SeleccionaColorMaterial a camio()
+	Set_VAOList(GLUT_CUBE, loadglutSolidCube_EBO(1.0));
+	Set_VAOList(GLUT_TORUS, loadglutSolidTorus_EBO(0.1, 0.2, 20, 20));
+	wglMakeCurrent(m_pDC->GetSafeHdc(), NULL);
+
+	// Redibuixem
+	InvalidateRect(NULL, false);
+}
+
+void CEntornVGIView::OnUpdateObjecteCamio(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(objecte == CAMIO);
 }
 
 

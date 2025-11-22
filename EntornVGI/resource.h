@@ -100,6 +100,7 @@
 #define ID_ARXIU_OBRIR_FITXER_OBJ       32772
 #define ID_Menu                         32774
 #define ID_VISTA_Mobil                  32775
+#define ID_OBJECTE_CAMIO                32775
 #define ID_VISTA_ZOOM                   32776
 #define ID_VISTA_POLARSEIXX             32777
 #define ID_VISTA_POLARS_X               32778
@@ -227,13 +228,14 @@
 #define ID_PROJECCI32906                32906
 #define ID_PROJECCI32907                32907
 #define ID_PROJECCIO_ORTOGRAFICA        32908
+#define ID_Menu32909                    32909
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        311
-#define _APS_NEXT_COMMAND_VALUE         32909
+#define _APS_NEXT_COMMAND_VALUE         32910
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

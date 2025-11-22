@@ -17,7 +17,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// EspaÒol (EspaÒa, alfabetizaciÛn internacional) resources
+// Espa√±ol (Espa√±a, alfabetizaci√≥n internacional) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
 LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
@@ -53,8 +53,8 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)\r\n"
     "LANGUAGE 10, 3\r\n"
     "#include ""res\\EntornVGI.rc2""  // recursos editados que no son de Microsoft Visual C++\r\n"
-    "#include ""l.ESN\\afxres.rc""      // Componentes est·ndar\r\n"
-    "#include ""l.ESN\\afxprint.rc""    // Recursos de impresiÛn y vista previa de impresiÛn\r\n"
+    "#include ""l.ESN\\afxres.rc""      // Componentes est√°ndar\r\n"
+    "#include ""l.ESN\\afxprint.rc""    // Recursos de impresi√≥n y vista previa de impresi√≥n\r\n"
     "#if !defined(_AFXDLL)\r\n"
     "#include ""l.ESN\\afxribbon.rc""        // Recursos de barra de control y cinta MFC\r\n"
     "#endif\r\n"
@@ -207,7 +207,7 @@ BEGIN
         MENUITEM "Obrir Fixer OBJ",             ID_ARXIU_OBRIR_FITXER_OBJ
         MENUITEM "&Cerrar",                     ID_FILE_CLOSE
         MENUITEM SEPARATOR
-        MENUITEM "&Configurar impresiÛn...",    ID_FILE_PRINT_SETUP
+        MENUITEM "&Configurar impresi√≥n...",    ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
         MENUITEM "Archivo reciente",            ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
@@ -220,7 +220,7 @@ BEGIN
             MENUITEM "<placeholder>",               ID_VIEW_TOOLBAR
         END
         MENUITEM "&Barra de estado",            ID_VIEW_STATUS_BAR
-        POPUP "&Aspecto de la aplicaciÛn"
+        POPUP "&Aspecto de la aplicaci√≥n"
         BEGIN
             MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
             MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_OFF_XP
@@ -243,6 +243,7 @@ BEGIN
     END
 END
 
+
 IDR_EntornVGITYPE MENU
 BEGIN
     POPUP "&Arxiu"
@@ -258,14 +259,14 @@ BEGIN
         MENUITEM "Guardar &como...",            ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
         MENUITEM "&Imprimir...\tCtrl+P",        ID_FILE_PRINT
-        MENUITEM "&Vista previa de impresiÛn",  ID_FILE_PRINT_PREVIEW
-        MENUITEM "&Configurar impresiÛn...",    ID_FILE_PRINT_SETUP
+        MENUITEM "&Vista previa de impresi√≥n",  ID_FILE_PRINT_PREVIEW
+        MENUITEM "&Configurar impresi√≥n...",    ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
         MENUITEM "Archivo reciente",            ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
         MENUITEM "&Salir",                      ID_APP_EXIT
     END
-    POPUP "&EdiciÛn"
+    POPUP "&Edici√≥n"
     BEGIN
         MENUITEM "&Deshacer\tCtrl+Z",           ID_EDIT_UNDO
         MENUITEM SEPARATOR
@@ -280,7 +281,7 @@ BEGIN
             MENUITEM "<placeholder>",               ID_VIEW_TOOLBAR
         END
         MENUITEM "&Barra de estado",            ID_VIEW_STATUS_BAR
-        POPUP "&Aspecto de la aplicaciÛn"
+        POPUP "&Aspecto de la aplicaci√≥n"
         BEGIN
             MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
             MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_OFF_XP
@@ -302,13 +303,13 @@ BEGIN
         MENUITEM "&Nueva ventana",              ID_WINDOW_NEW
     END
     MENUITEM SEPARATOR
-    POPUP "C‡mera"
+    POPUP "C√†mera"
     BEGIN
-        MENUITEM "ESF»RICA?",                   ID_CAMERA_ESFERICA, CHECKED
-        MENUITEM "MÚbil?",                      32775, CHECKED
+        MENUITEM "ESF√àRICA?",                   ID_CAMERA_ESFERICA, CHECKED
+        MENUITEM "M√≤bil?",                      ID_OBJECTE_CAMIO, CHECKED
         MENUITEM "Zoom?",                       ID_VISTA_ZOOM, CHECKED
         MENUITEM "Zoom Orto?",                  ID_VISTA_ZOOM_ORTO, CHECKED
-        MENUITEM "SatËl.lit?",                  32829, CHECKED
+        MENUITEM "Sat√®l.lit?",                  32829, CHECKED
         MENUITEM SEPARATOR
         MENUITEM "Polars Eix X",                ID_VISTA_POLARS_X, CHECKED
         MENUITEM "Polars Eix Y",                32779, CHECKED
@@ -330,10 +331,10 @@ BEGIN
         MENUITEM "Eixos?",                      ID_VISTA_EIXOS, CHECKED
         MENUITEM "SkyBox?",                     ID_VISTA_SKYBOX, CHECKED
     END
-    POPUP "ProjecciÛ"
+    POPUP "Projecci√≥"
     BEGIN
         MENUITEM "Perspectiva",                 ID_PROJECCIO_PERSPECTIVA, CHECKED
-        MENUITEM "Ortogr‡fica",                 ID_PROJECCIO_ORTOGRAFICA, CHECKED
+        MENUITEM "Ortogr√†fica",                 ID_PROJECCIO_ORTOGRAFICA, CHECKED
     END
     POPUP "Objecte"
     BEGIN
@@ -342,7 +343,7 @@ BEGIN
         MENUITEM "Cub RGB",                     ID_OBJECTE_CUB_RGB, CHECKED
         MENUITEM "Esfera",                      32788, CHECKED
         MENUITEM "Tetera",                      32789, CHECKED
-        MENUITEM SEPARATOR
+        MENUITEM "Cami√≥",                       ID_OBJECTE_CAMIO
         MENUITEM "Arc",                         32871, CHECKED
         POPUP "Corbes"
         BEGIN
@@ -361,11 +362,11 @@ BEGIN
     END
     POPUP "Transforma"
     BEGIN
-        MENUITEM "TraslaciÛ?",                  32791, CHECKED
-        MENUITEM "Origen TraslaciÛ",            ID_TRANSFORMA_ORIGENTRASLACIO
+        MENUITEM "Traslaci√≥?",                  32791, CHECKED
+        MENUITEM "Origen Traslaci√≥",            ID_TRANSFORMA_ORIGENTRASLACIO
         MENUITEM SEPARATOR
-        MENUITEM "RotaciÛ?",                    32793, CHECKED
-        MENUITEM "Origen RotaciÛ",              ID_TRANSFORMA_ORIGENROTACIO
+        MENUITEM "Rotaci√≥?",                    32793, CHECKED
+        MENUITEM "Origen Rotaci√≥",              ID_TRANSFORMA_ORIGENROTACIO
         MENUITEM SEPARATOR
         MENUITEM "Escalat?",                    ID_TRANSFORMA_ESCALAT, CHECKED
         MENUITEM "Origen Escalat",              ID_TRANSFORMA_ORIGENESCALAT
@@ -381,7 +382,7 @@ BEGIN
         MENUITEM "Test Visibilitat?",           32802, CHECKED
         MENUITEM "Z-Buffer?",                   32803, CHECKED
     END
-    POPUP "IluminaciÛ"
+    POPUP "Iluminaci√≥"
     BEGIN
         MENUITEM "Llum Fixe?",                  ID_ILUMINACIO_LLUMFIXE, CHECKED
         MENUITEM SEPARATOR
@@ -464,7 +465,7 @@ IDR_POPUP_SORT MENU
 BEGIN
     POPUP "Ordenar"
     BEGIN
-        MENUITEM "&Ordenar alfabÈticamente",    ID_SORTING_SORTALPHABETIC
+        MENUITEM "&Ordenar alfab√©ticamente",    ID_SORTING_SORTALPHABETIC
         MENUITEM "Ordenar por &tipo",           ID_SORTING_SORTBYTYPE
         MENUITEM "Ordenar por &acceso",         ID_SORTING_SORTBYACCESS
         MENUITEM "Agrupar por t&ipo",           ID_SORTING_GROUPBYTYPE
@@ -547,9 +548,9 @@ BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,17,27,21,20
     LTEXT           "Copyright (C) 2025",IDC_STATIC,50,53,76,8
     DEFPUSHBUTTON   "Aceptar",IDOK,246,53,50,14,WS_GROUP
-    LTEXT           "VISUALITZACI” GR¿FICA INTERACTIVA  (Escola d'Enginyeria - UAB)",IDC_STATIC,50,14,227,8
-    LTEXT           "Entorn Gr‡fic VS2022 amb MFC i OpenGL 4.6 per a pr‡ctiques",IDC_STATIC,50,27,221,8
-    LTEXT           "AUTOR: Enric MartÌ GÚdia",IDC_STATIC,50,40,107,8
+    LTEXT           "VISUALITZACI√ì GR√ÄFICA INTERACTIVA  (Escola d'Enginyeria - UAB)",IDC_STATIC,50,14,227,8
+    LTEXT           "Entorn Gr√†fic VS2022 amb MFC i OpenGL 4.6 per a pr√†ctiques",IDC_STATIC,50,27,221,8
+    LTEXT           "AUTOR: Enric Mart√≠ G√≤dia",IDC_STATIC,50,40,107,8
 END
 
 
@@ -575,11 +576,11 @@ BEGIN
     BEGIN
         BLOCK "0c0a04b0"
         BEGIN
-            VALUE "CompanyName", "TODO: <Nombre de la compaÒÌa>"
+            VALUE "CompanyName", "TODO: <Nombre de la compa√±√≠a>"
             VALUE "FileDescription", "EntornVGI"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "EntornVGI.exe"
-            VALUE "LegalCopyright", "TODO: (c) <Nombre de la compaÒÌa>.  Reservados todos los derechos."
+            VALUE "LegalCopyright", "TODO: (c) <Nombre de la compa√±√≠a>.  Reservados todos los derechos."
             VALUE "OriginalFilename", "EntornVGI.exe"
             VALUE "ProductName", "TODO: <Nombre del producto>"
             VALUE "ProductVersion", "1.0.0.1"
@@ -629,7 +630,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDP_OLE_INIT_FAILED     "Error de inicializaciÛn OLE.  Aseg˙rese de que la versiÛn de las bibliotecas OLE es la correcta."
+    IDP_OLE_INIT_FAILED     "Error de inicializaci√≥n OLE.  Aseg√∫rese de que la versi√≥n de las bibliotecas OLE es la correcta."
     ID_INDICATOR_R          "Radi =%d"
     ID_INDICATOR_ALFA       "Alfa=%d"
     ID_INDICATOR_BETA       "Beta=%d"
@@ -645,7 +646,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "Entorn Gr‡fic VS2022 amb MFC i OpenGL 4.6 (VisualitzaciÛ Gr‡fica Interactiva - Grau en Enginyeria Inform‡tica - Escola Enginyeria - UAB)"
+    IDR_MAINFRAME           "Entorn Gr√†fic VS2022 amb MFC i OpenGL 4.6 (Visualitzaci√≥ Gr√†fica Interactiva - Grau en Enginyeria Inform√†tica - Escola Enginyeria - UAB)"
     IDR_EntornVGITYPE       "\nEntornVGI\nEntornVGI\n\n\nEntornVGI.Document\nEntornVGI.Document"
     ID_WINDOW_MANAGER       "&Ventanas..."
 END
@@ -653,7 +654,7 @@ END
 STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "EntornVGI"
-    AFX_IDS_IDLEMESSAGE     "AplicaciÛ Gr‡fica VS2022 amb OpenGL amb primitives GLUT per a VAO i EBO"
+    AFX_IDS_IDLEMESSAGE     "Aplicaci√≥ Gr√†fica VS2022 amb OpenGL amb primitives GLUT per a VAO i EBO"
 END
 
 STRINGTABLE
@@ -673,17 +674,17 @@ BEGIN
     ID_FILE_CLOSE           "Cerrar el documento activo\nCerrar"
     ID_FILE_SAVE            "Guardar el documento activo\nGuardar"
     ID_FILE_SAVE_AS         "Guardar el documento activo con un nombre nuevo\nGuardar como"
-    ID_FILE_PAGE_SETUP      "Cambiar las opciones de impresiÛn\nConfigurar p·gina"
-    ID_FILE_PRINT_SETUP     "Cambiar las opciones de impresora y de impresiÛn\nConfigurar impresiÛn"
+    ID_FILE_PAGE_SETUP      "Cambiar las opciones de impresi√≥n\nConfigurar p√°gina"
+    ID_FILE_PRINT_SETUP     "Cambiar las opciones de impresora y de impresi√≥n\nConfigurar impresi√≥n"
     ID_FILE_PRINT           "Imprimir el documento activo\nImprimir"
-    ID_FILE_PRINT_DIRECT    "Imprimir el documento actual con las opciones actuales\nImpresiÛn r·pida"
-    ID_FILE_PRINT_PREVIEW   "Mostrar p·ginas completas\nVista previa de impresiÛn"
+    ID_FILE_PRINT_DIRECT    "Imprimir el documento actual con las opciones actuales\nImpresi√≥n r√°pida"
+    ID_FILE_PRINT_PREVIEW   "Mostrar p√°ginas completas\nVista previa de impresi√≥n"
 END
 
 STRINGTABLE
 BEGIN
-    ID_APP_ABOUT            "Mostrar informaciÛn del programa, n˙mero de versiÛn y copyright\nAcerca de"
-    ID_APP_EXIT             "Salir de la aplicaciÛn; permite guardar documentos\nSalir"
+    ID_APP_ABOUT            "Mostrar informaci√≥n del programa, n√∫mero de versi√≥n y copyright\nAcerca de"
+    ID_APP_EXIT             "Salir de la aplicaci√≥n; permite guardar documentos\nSalir"
 END
 
 STRINGTABLE
@@ -724,17 +725,17 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_EDIT_CLEAR           "Borrar la selecciÛn\nBorrar"
+    ID_EDIT_CLEAR           "Borrar la selecci√≥n\nBorrar"
     ID_EDIT_CLEAR_ALL       "Borrar todo\nBorrar todo"
-    ID_EDIT_COPY            "Copiar la selecciÛn y la coloca en el Portapapeles\nCopiar"
-    ID_EDIT_CUT             "Cortar la selecciÛn y la coloca en el Portapapeles\nCortar"
+    ID_EDIT_COPY            "Copiar la selecci√≥n y la coloca en el Portapapeles\nCopiar"
+    ID_EDIT_CUT             "Cortar la selecci√≥n y la coloca en el Portapapeles\nCortar"
     ID_EDIT_FIND            "Buscar el texto especificado\nBuscar"
     ID_EDIT_PASTE           "Insertar el contenido del Portapapeles\nPegar"
-    ID_EDIT_REPEAT          "Repetir la ˙ltima acciÛn\nRepetir"
-    ID_EDIT_REPLACE         "Reemplazar el texto especÌfico con texto diferente\nReemplazar"
+    ID_EDIT_REPEAT          "Repetir la √∫ltima acci√≥n\nRepetir"
+    ID_EDIT_REPLACE         "Reemplazar el texto espec√≠fico con texto diferente\nReemplazar"
     ID_EDIT_SELECT_ALL      "Seleccionar todo el documento\nSeleccionar todo"
-    ID_EDIT_UNDO            "Deshacer la ˙ltima acciÛn\nDeshacer"
-    ID_EDIT_REDO            "Rehacer la acciÛn previamente deshecha\nRehacer"
+    ID_EDIT_UNDO            "Deshacer la √∫ltima acci√≥n\nDeshacer"
+    ID_EDIT_REDO            "Rehacer la acci√≥n previamente deshecha\nRehacer"
 END
 
 STRINGTABLE
@@ -744,10 +745,10 @@ END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_SCSIZE          "Cambiar el tamaÒo de la ventana"
-    AFX_IDS_SCMOVE          "Cambiar la posiciÛn de la ventana"
+    AFX_IDS_SCSIZE          "Cambiar el tama√±o de la ventana"
+    AFX_IDS_SCMOVE          "Cambiar la posici√≥n de la ventana"
     AFX_IDS_SCMINIMIZE      "Reducir la ventana a un icono"
-    AFX_IDS_SCMAXIMIZE      "Aumentar la ventana al tamaÒo m·ximo"
+    AFX_IDS_SCMAXIMIZE      "Aumentar la ventana al tama√±o m√°ximo"
     AFX_IDS_SCNEXTWINDOW    "Cambiar a la ventana de documento siguiente"
     AFX_IDS_SCPREVWINDOW    "Cambiar a la ventana de documento anterior"
     AFX_IDS_SCCLOSE         "Cerrar la ventana activa y preguntar si desea guardar los documentos"
@@ -755,21 +756,21 @@ END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_SCRESTORE       "Restaurar la ventana a su tamaÒo normal"
+    AFX_IDS_SCRESTORE       "Restaurar la ventana a su tama√±o normal"
     AFX_IDS_SCTASKLIST      "Activar la Lista de tareas"
     AFX_IDS_MDICHILD        "Activar esta ventana"
 END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_PREVIEW_CLOSE   "Cerrar el modo de vista previa de impresiÛn\nCancelar Vista previa"
+    AFX_IDS_PREVIEW_CLOSE   "Cerrar el modo de vista previa de impresi√≥n\nCancelar Vista previa"
 END
 
 STRINGTABLE
 BEGIN
     IDS_STATUS_PANE1        "Panel 1"
     IDS_STATUS_PANE2        "Panel 2"
-    IDS_TOOLBAR_STANDARD    "Est·ndar"
+    IDS_TOOLBAR_STANDARD    "Est√°ndar"
     IDS_TOOLBAR_CUSTOMIZE   "Personalizar..."
 END
 
@@ -794,7 +795,7 @@ BEGIN
     IDS_FIND_TAB            "Buscar"
 END
 
-#endif    // EspaÒol (EspaÒa, alfabetizaciÛn internacional) resources
+#endif    // Espa√±ol (Espa√±a, alfabetizaci√≥n internacional) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -811,8 +812,8 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
 LANGUAGE 10, 3
 #include "res\EntornVGI.rc2"  // recursos editados que no son de Microsoft Visual C++
-#include "l.ESN\afxres.rc"      // Componentes est·ndar
-#include "l.ESN\afxprint.rc"    // Recursos de impresiÛn y vista previa de impresiÛn
+#include "l.ESN\afxres.rc"      // Componentes est√°ndar
+#include "l.ESN\afxprint.rc"    // Recursos de impresi√≥n y vista previa de impresi√≥n
 #if !defined(_AFXDLL)
 #include "l.ESN\afxribbon.rc"        // Recursos de barra de control y cinta MFC
 #endif

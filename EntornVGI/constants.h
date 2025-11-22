@@ -31,7 +31,7 @@
 
 //-------------- VGI: Tipus d'Objectes
 #define ARC 'a'
-#define CAMIO 'm'
+#define CAMIO '5'
 #define CILINDRE 'y'
 #define CUB 'c'
 #define CUB_RGB 'd'
@@ -56,6 +56,7 @@
 #define VAIXELL 'v'
 #define OBJ3DS '3'		// Objecte format 3DS
 #define OBJOBJ '4'		// Objecte format OBJ
+
 
 //-------------- VGI: Tipus d'Iluminacio
 #define PUNTS 'P'
