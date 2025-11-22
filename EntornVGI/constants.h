@@ -55,7 +55,8 @@
 #define TORUS 'o'
 #define VAIXELL 'v'
 #define OBJ3DS '3'		// Objecte format 3DS
-#define OBJOBJ '4'		// Objecte format OBJ
+#define OBJOBJ '4'	// Objecte format OBJ
+#define OCTOPUS 'x'
 
 
 //-------------- VGI: Tipus d'Iluminacio

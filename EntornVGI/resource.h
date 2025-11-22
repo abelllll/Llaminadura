@@ -229,6 +229,7 @@
 #define ID_PROJECCI32907                32907
 #define ID_PROJECCIO_ORTOGRAFICA        32908
 #define ID_Menu32909                    32909
+#define ID_OBJECTE_OCTOPUS				32911
 
 // Next default values for new objects
 // 

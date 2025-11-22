@@ -156,6 +156,9 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	case CAMIO:
 		camio(sh_programID, MatriuVista, MatriuTG, sw_mat);
 		break;
+	case OCTOPUS:
+		octopus(sh_programID, MatriuVista, MatriuTG, sw_mat);
+		break;
 
 // Dibuix de l'objecte OBJ
 	case OBJOBJ:
@@ -465,7 +468,9 @@ void dibuixa(GLuint sh_programID, char obj, glm::mat4 MatriuVista, glm::mat4 Mat
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 		draw_TriVAO_Object(GLUT_TEAPOT); // glutSolidTeapot(1.0);
 		break;
+
 	}
+
 }
 
 // OBJECTE ARC
@@ -1330,4 +1335,115 @@ void camio(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool 
 		draw_TriEBO_Object(GLUT_TORUS);
 	}
 }
+void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
+{
+	CColor col_object;
+	glm::mat4 NormalMatrix(1.0f), ModelMatrix(1.0f);
+
+	// Dimensions principals de l'Octopus
+	const float baseHeight = 1.0f;   // Alçada de la base (cilindre amb tapes)
+	const float baseRadius = 2.0f;   // Radi de la base
+	const float pillarHeight = 2.0f;   // Alçada del pilar
+	const float pillarRadius = 1.0f;   // Radi del pilar
+	const float rotorRadius = 5.0f;   // Radi de l'esfera central
+	const float armLength = 20.0f;  // Longitud de cada braç
+	const float armRadius = 0.5f;   // Radi dels braços
+	const float cabinRadiusX = 3.0f;   // Radi de la cabina en X
+	const float cabinRadiusY = 3.0f;   // Radi de la cabina en el sentit radial
+	const float cabinRadiusZ = 0.75f;  // Radi vertical de la cabina (altura 1.5)
+	const float bubbleRadiusX = 2.0f;   // Radi de la bombolla en X
+	const float bubbleRadiusY = 2.0f;   // Radi de la bombolla en el sentit radial
+	const float bubbleRadiusZ = 0.5f;   // Radi vertical de la bombolla (altura 1.0)
+
+	// Alçada del centre del rotor
+	const float rotorCenterZ = baseHeight + pillarHeight + rotorRadius;
+
+	// Colors per als vuit braços (RGB)
+	const float armColors[8][3] = {
+		{1.0f, 0.0f, 0.0f},   // Vermell
+		{1.0f, 0.5f, 0.0f},   // Taronja
+		{1.0f, 1.0f, 0.0f},   // Groc
+		{0.0f, 1.0f, 0.0f},   // Verd
+		{0.0f, 1.0f, 1.0f},   // Cian
+		{0.0f, 0.0f, 1.0f},   // Blau
+		{1.0f, 0.0f, 1.0f},   // Magenta
+		{0.5f, 0.0f, 1.0f}    // Lila
+	};
+
+	// 1. Base de l'atracció (cilindre amb tapes)
+	col_object.r = col_object.g = col_object.b = 0.5f; col_object.a = 1.0f;
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, baseHeight / 2.0f));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(baseRadius, baseRadius, baseHeight));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	draw_TriEBO_Object(GLU_CILINDRE_SENCER);
+
+	// 2. Pilar (cilindre sense tapes)
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, baseHeight + pillarHeight / 2.0f));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(pillarRadius, pillarRadius, pillarHeight));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	draw_TriEBO_Object(GLU_CYLINDER);
+
+	// 3. Rotor (esfera)
+	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, rotorCenterZ));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(rotorRadius, rotorRadius, rotorRadius));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+	draw_TriEBO_Object(GLU_SPHERE);
+
+	// 4. Dibuix dels 8 braços
+	for (int i = 0; i < 8; ++i)
+	{
+		float ang = static_cast<float>(i) * (TWOPI / 8.0f);
+		// color del braç i cabina
+		col_object.r = armColors[i][0]; col_object.g = armColors[i][1]; col_object.b = armColors[i][2]; col_object.a = 1.0f;
+		// Braç (cilindre)
+		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+		float dxArm = cos(ang) * (rotorRadius + armLength / 2.0f);
+		float dyArm = sin(ang) * (rotorRadius + armLength / 2.0f);
+		ModelMatrix = glm::translate(MatriuTG, glm::vec3(dxArm, dyArm, rotorCenterZ));
+		ModelMatrix = glm::rotate(ModelMatrix, ang, glm::vec3(0.0f, 0.0f, 1.0f));
+		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		ModelMatrix = glm::scale(ModelMatrix, glm::vec3(armRadius, armRadius, armLength));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+		draw_TriEBO_Object(GLU_CYLINDER);
+
+		// Cabina (esfera escalada)
+		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+		float dxCab = cos(ang) * (rotorRadius + armLength + cabinRadiusY);
+		float dyCab = sin(ang) * (rotorRadius + armLength + cabinRadiusY);
+		ModelMatrix = glm::translate(MatriuTG, glm::vec3(dxCab, dyCab, rotorCenterZ));
+		ModelMatrix = glm::rotate(ModelMatrix, ang, glm::vec3(0.0f, 0.0f, 1.0f));
+		ModelMatrix = glm::scale(ModelMatrix, glm::vec3(cabinRadiusX, cabinRadiusY, cabinRadiusZ));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+		draw_TriEBO_Object(GLU_SPHERE);
+
+		// Bombolla (esfera escalada, color transparent)
+		CColor bubbleColor; bubbleColor.r = 0.5f; bubbleColor.g = 1.0f; bubbleColor.b = 1.0f; bubbleColor.a = 0.5f;
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		SeleccionaColorMaterial(sh_programID, bubbleColor, sw_mat);
+		float zBub = rotorCenterZ + cabinRadiusZ + bubbleRadiusZ;
+		ModelMatrix = glm::translate(MatriuTG, glm::vec3(dxCab, dyCab, zBub));
+		ModelMatrix = glm::rotate(ModelMatrix, ang, glm::vec3(0.0f, 0.0f, 1.0f));
+		ModelMatrix = glm::scale(ModelMatrix, glm::vec3(bubbleRadiusX, bubbleRadiusY, bubbleRadiusZ));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+		draw_TriEBO_Object(GLU_SPHERE);
+		glDisable(GL_BLEND);
+	}
+}
+
 // FI OBJECTE TIE: FETS PER ALUMNES -----------------------------------------------------------------

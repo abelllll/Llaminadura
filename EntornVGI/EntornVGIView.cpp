@@ -95,6 +95,9 @@ BEGIN_MESSAGE_MAP(CEntornVGIView, CView)
 	//Objeto Camión:
 	ON_COMMAND(ID_OBJECTE_CAMIO, &CEntornVGIView::OnObjecteCamio)
 	ON_UPDATE_COMMAND_UI(ID_OBJECTE_CAMIO, &CEntornVGIView::OnUpdateObjecteCamio)
+	//Objeto Octopus
+	ON_COMMAND(ID_OBJECTE_OCTOPUS, &CEntornVGIView::OnObjecteOctopus)
+	ON_UPDATE_COMMAND_UI(ID_OBJECTE_OCTOPUS, &CEntornVGIView::OnUpdateObjecteOctopus)
 	ON_COMMAND(ID_TRANSFORMA_TRASLACIO, &CEntornVGIView::OnTransformaTraslacio)
 	ON_UPDATE_COMMAND_UI(ID_TRANSFORMA_TRASLACIO, &CEntornVGIView::OnUpdateTransformaTraslacio)
 	ON_COMMAND(ID_TRANSFORMA_ORIGENTRASLACIO, &CEntornVGIView::OnTransformaOrigentraslacio)
@@ -4181,6 +4184,30 @@ void CEntornVGIView::OnObjecteCamio()
 void CEntornVGIView::OnUpdateObjecteCamio(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetCheck(objecte == CAMIO);
+}
+
+void CEntornVGIView::OnObjecteOctopus()
+{
+	mobil = false;
+	zzoom = false;
+	objecte = OCTOPUS;
+
+	// Prepara les primitives necessàries per a l'Octopus
+	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hrc);
+	netejaVAOList();
+	// Cilindre senzill i cilindre sencer
+	Set_VAOList(GLU_CYLINDER, loadgluCylinder_EBO(1.0, 1.0, 1.0, 20, 20));
+	Set_VAOList(GLU_CILINDRE_SENCER, loadCilindre_EBO(1.0, 1.0, 1.0, 20, 20));
+	// Esfera
+	Set_VAOList(GLU_SPHERE, loadgluSphere_EBO(1.0, 20, 20));
+	wglMakeCurrent(m_pDC->GetSafeHdc(), NULL);
+
+	InvalidateRect(NULL, FALSE);  // força repintat
+}
+
+void CEntornVGIView::OnUpdateObjecteOctopus(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(objecte == OCTOPUS);
 }
 
 

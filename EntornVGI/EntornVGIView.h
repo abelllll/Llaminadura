@@ -309,6 +309,8 @@ public:
 	afx_msg void OnObjecteTetera();
 	afx_msg void OnObjecteCamio();
 	afx_msg void OnUpdateObjecteCamio(CCmdUI* pCmdUI);
+	afx_msg void OnObjecteOctopus();
+	afx_msg void OnUpdateObjecteOctopus(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateObjecteTetera(CCmdUI *pCmdUI);
 	afx_msg void OnTransformaTraslacio();
 	afx_msg void OnUpdateTransformaTraslacio(CCmdUI *pCmdUI);
