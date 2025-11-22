@@ -1,14 +1,14 @@
-//******** PRACTICA VISUALITZACIÓ GRÀFICA INTERACTIVA (Escola Enginyeria - UAB)
-//******** Entorn bàsic VS2022 MULTIFINESTRA amb OpenGL 4.6, interfície MFC i llibreries GLM
-//******** Ferran Poveda, Marc Vivet, Carme Julià, Débora Gil, Enric Martí Gòdia (Setembre 2025)
+ï»¿//******** PRACTICA VISUALITZACIÃ“ GRÃ€FICA INTERACTIVA (Escola Enginyeria - UAB)
+//******** Entorn bÃ sic VS2022 MULTIFINESTRA amb OpenGL 4.6, interfÃ­cie MFC i llibreries GLM
+//******** Ferran Poveda, Marc Vivet, Carme JuliÃ , DÃ©bora Gil, Enric MartÃ­ GÃ²dia (Setembre 2025)
 // escena.cpp : Aqui es on ha d'anar el codi de les funcions que 
 //              dibuixin les escenes.
 //
-//    Versió 2.0:	- Objectes Cub, Esfera, Tetera (primitives libreria GLUT)
+//    VersiÃ³ 2.0:	- Objectes Cub, Esfera, Tetera (primitives libreria GLUT)
 //
-//	  Versió 2.2:	- Objectes Cub, Esfera, Tetera definides en fitxer font glut_geometry amb altres primitives GLUT
+//	  VersiÃ³ 2.2:	- Objectes Cub, Esfera, Tetera definides en fitxer font glut_geometry amb altres primitives GLUT
 //
-//	  Versió 2.5:	- Objectes cubRGB i Tie (nau Star Wars fet per alumnes)
+//	  VersiÃ³ 2.5:	- Objectes cubRGB i Tie (nau Star Wars fet per alumnes)
 //
 
 #include "stdafx.h"
@@ -16,19 +16,19 @@
 #include "visualitzacio.h"
 #include "escena.h"
 
-// Dibuixa Eixos Coordenades Món i Reixes, activant un shader propi.
+// Dibuixa Eixos Coordenades MÃ³n i Reixes, activant un shader propi.
 void dibuixa_Eixos(GLuint ax_programID, bool eix, GLuint axis_Id, CMask3D reixa, CPunt3D hreixa, 
 	glm::mat4 MatriuProjeccio, glm::mat4 MatriuVista)
 {
-// Visualització Eixos Coordenades Mòn
+// VisualitzaciÃ³ Eixos Coordenades MÃ²n
 	glUseProgram(ax_programID);
 
-// Pas Matrius Projecció i Vista Vista a shader
+// Pas Matrius ProjecciÃ³ i Vista Vista a shader
 	glUniformMatrix4fv(glGetUniformLocation(ax_programID, "projectionMatrix"), 1, GL_FALSE, &MatriuProjeccio[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(ax_programID, "viewMatrix"), 1, GL_FALSE, &MatriuVista[0][0]);
 
 // Attribute Locations must be setup before calling glLinkProgram()
-	glBindAttribLocation(ax_programID, 0, "in_Vertex"); // Vèrtexs
+	glBindAttribLocation(ax_programID, 0, "in_Vertex"); // VÃ¨rtexs
 	glBindAttribLocation(ax_programID, 1, "in_Color");	// Color
 
 //  Dibuix dels eixos
@@ -43,14 +43,14 @@ void dibuixa_Skybox(GLuint sk_programID, GLuint cmTexture, char eix_Polar, glm::
 
 	glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
 
-// Activació shader per a cub skybox
+// ActivaciÃ³ shader per a cub skybox
 	glUseProgram(sk_programID);
 
-// Pas Matrius Projecció i Vista a shader
+// Pas Matrius ProjecciÃ³ i Vista a shader
 	glUniformMatrix4fv(glGetUniformLocation(sk_programID, "projectionMatrix"), 1, GL_FALSE, &MatriuProjeccio[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(sk_programID, "viewMatrix"), 1, GL_FALSE, &MatriuVista[0][0]);
 
-// Rotar skyBox per a orientar sobre eix superior Z o X en Vista Esfèrica (POLARX, POLARY, POLARZ)
+// Rotar skyBox per a orientar sobre eix superior Z o X en Vista EsfÃ¨rica (POLARX, POLARY, POLARZ)
 	if (eix_Polar == POLARZ) ModelMatrix = glm::rotate(ModelMatrix, radians(90.0f), vec3(1.0f, 0.0f, 0.0f));
 	else if (eix_Polar == POLARX) ModelMatrix = glm::rotate(ModelMatrix, radians(-90.0f), vec3(0.0f, 0.0f, 1.0f));
 
@@ -63,7 +63,7 @@ void dibuixa_Skybox(GLuint sk_programID, GLuint cmTexture, char eix_Polar, glm::
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cmTexture);
 
 // Attribute Locations must be setup before calling glLinkProgram()
-	glBindAttribLocation(sk_programID, 0, "in_Vertex"); // Vèrtexs
+	glBindAttribLocation(sk_programID, 0, "in_Vertex"); // VÃ¨rtexs
 
 //  Dibuix del Skybox
 	drawCubeSkybox();
@@ -87,7 +87,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	CColor color_vermell, color_Mar;
 	bool sw_material[5];
 	
-// Matrius de Transformació
+// Matrius de TransformaciÃ³
 	glm::mat4 NormalMatrix(1.0), ModelMatrix(1.0), TransMatrix(1.0), ScaleMatrix(1.0), RotMatrix(1.0);
 
 // VAO
@@ -98,10 +98,10 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	color_vermell.r = 1.0;	color_vermell.g = 0.0; color_vermell.b = 0.0; color_vermell.a = 1.0;
 	sw_material[0] = false;	sw_material[1] = true; sw_material[2] = true; sw_material[3] = false;	sw_material[4] = true;
 
-// Shader Visualització Objectes
+// Shader VisualitzaciÃ³ Objectes
 	glUseProgram(sh_programID);
 
-// Parametrització i activació/desactivació de textures
+// ParametritzaciÃ³ i activaciÃ³/desactivaciÃ³ de textures
 	if (texturID[0] != 0) SetTextureParameters(0, texturID[0], true, true, textur_map, false);
 	if (textur) {	glUniform1i(glGetUniformLocation(sh_programID, "textur"), GL_TRUE); //glEnable(GL_TEXTURE_2D);
 					glUniform1i(glGetUniformLocation(sh_programID, "modulate"), GL_TRUE); //glEnable(GL_MODULATE);
@@ -112,12 +112,12 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	glUniform1i(glGetUniformLocation(sh_programID, "flag_invert_y"), flagInvertY);
 
 // Attribute Locations must be setup before calling glLinkProgram()
-	glBindAttribLocation(sh_programID, 0, "in_Vertex");		// Vèrtexs
+	glBindAttribLocation(sh_programID, 0, "in_Vertex");		// VÃ¨rtexs
 	glBindAttribLocation(sh_programID, 1, "in_Color");		// Color
 	glBindAttribLocation(sh_programID, 2, "in_Normal");		// Normals
 	glBindAttribLocation(sh_programID, 3, "in_TexCoord");	// Textura
 
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 
 	switch (objecte)
@@ -125,17 +125,17 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 
 // Arc
 	case ARC:
-		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color de l'objecte.
+		// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color de l'objecte.
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		arc(sh_programID, MatriuVista, MatriuTG, sw_mat);
 
-		// Activar transparència
+		// Activar transparÃ¨ncia
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Dibuix geometria Mar
 		color_Mar.r = 0.5;	color_Mar.g = 0.4; color_Mar.b = 0.9; color_Mar.a = 0.5;
-		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color de l'objecte.
+		// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color de l'objecte.
 		SeleccionaColorMaterial(sh_programID, color_Mar, sw_mat);
 		// Pas ModelView Matrix a shader
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
@@ -144,7 +144,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 		draw_TriVAO_Object(MAR_FRACTAL_VAO);
 
-		// Desactivar transparència
+		// Desactivar transparÃ¨ncia
 		glDisable(GL_BLEND);
 		break;
 
@@ -169,7 +169,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		// Pas NormalMatrix a shader
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 
-		// Definir característiques material de cada punt
+		// Definir caracterÃ­stiques material de cada punt
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		// Objecte OBJ: Dibuix de l'objecte OBJ amb textures amb varis VAO's, un per a cada material.
 		objecteOBJ->draw_TriVAO_OBJ(sh_programID);	// Dibuixar VAO a pantalla
@@ -179,7 +179,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	case C_BEZIER:
 		// Dibuixar Punts de Control
 		if (sw_PC)
-		{	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color vermell.
+		{	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color vermell.
 			SeleccionaColorMaterial(sh_programID, color_vermell, sw_material);
 
 			for (int i = 0; i < nptsU; i++)
@@ -193,7 +193,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 			}
 
 		}
-		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color de l'objecte.
+		// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color de l'objecte.
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		ModelMatrix = MatriuTG;
 		// Pas ModelViewMatrix a shader
@@ -207,7 +207,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 
 // Corba Lemniscata
 	case C_LEMNISCATA:
-		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color de l'objecte.
+		// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color de l'objecte.
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		ModelMatrix = MatriuTG;
 		// Pas ModelViewMatrix a shader
@@ -223,7 +223,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	case C_BSPLINE:
 		// Dibuixar Punts de Control
 		if (sw_PC)
-		{	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color vermell.
+		{	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color vermell.
 			SeleccionaColorMaterial(sh_programID, color_vermell, sw_material);
 			for (int i = 0; i < nptsU; i++)
 			{	ModelMatrix = glm::translate(MatriuTG, vec3(PC_u[i].x, PC_u[i].y, PC_u[i].z));
@@ -250,7 +250,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	case C_HERMITTE:
 		// Dibuixar Punts de Control
 		if (sw_PC)
-		{	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color vermell.
+		{	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color vermell.
 			SeleccionaColorMaterial(sh_programID, color_vermell, sw_material);
 			for (int i = 0; i < nptsU; i++)
 			{	ModelMatrix = glm::translate(MatriuTG, vec3(PC_u[i].x, PC_u[i].y, PC_u[i].z));
@@ -277,7 +277,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 	case C_CATMULL_ROM:
 		// Dibuixar Punts de Control
 		if (sw_PC)
-		{	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material pel color vermell.
+		{	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material pel color vermell.
 			SeleccionaColorMaterial(sh_programID, color_vermell, sw_material);
 			for (int i = 0; i < nptsU; i++)
 			{	ModelMatrix = glm::translate(MatriuTG, vec3(PC_u[i].x, PC_u[i].y, PC_u[i].z));
@@ -301,7 +301,7 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		if (dib_TFrenet) draw_TFCatmullRom_Curve(sh_programID, PC_u, nptsU, pasCS); // Dibuixar Triedre de Frenet
 		break;
 
-// Matriu de Primitives SENSE pre-compilació prèvia en VBO (precompilació, draw i alliberació VBO en una funció)
+// Matriu de Primitives SENSE pre-compilaciÃ³ prÃ¨via en VBO (precompilaciÃ³, draw i alliberaciÃ³ VBO en una funciÃ³)
 	case MATRIUP:
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		for (i = 0; i < 10; i++)
@@ -356,8 +356,8 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		gluSphere(1.0, 20, 20);
 		break;
 
-// Matriu de Primitives AMB pre-compilació prèvia en VBO 
-//	(separació en 3 funcions: *_VBO() per precompilació, draw*() per dibuix i deleteVBO() per alliberar VBO)
+// Matriu de Primitives AMB pre-compilaciÃ³ prÃ¨via en VBO 
+//	(separaciÃ³ en 3 funcions: *_VBO() per precompilaciÃ³, draw*() per dibuix i deleteVBO() per alliberar VBO)
 	case MATRIUP_VAO:
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 
@@ -402,18 +402,18 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 
 // Dibuix de la resta d'objectes
 	default:
-		// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+		// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 		dibuixa(sh_programID, objecte,MatriuVista, MatriuTG);
 		break;
 	}
 
-// Enviar les comandes gràfiques a pantalla
+// Enviar les comandes grÃ fiques a pantalla
 //	glFlush();
 }
 
 
-// dibuixa: Funció que dibuixa objectes simples de la llibreria GLUT segons obj
+// dibuixa: FunciÃ³ que dibuixa objectes simples de la llibreria GLUT segons obj
 void dibuixa(GLuint sh_programID, char obj, glm::mat4 MatriuVista, glm::mat4 MatriuTG)
 {
 	glm::mat4 NormalMatrix(1.0), ModelMatrix(1.0); // TransMatrix(1.0); // ScaleMatrix(1.0), RotMatrix(1.0);
@@ -550,7 +550,7 @@ CVAO loadSea_VAO(CColor colorM)
 	GLuint vaoId = 0; GLuint vboId = 0;
 	CVAO seaVAO;
 	seaVAO.vaoId = 0;	seaVAO.vboId = 0;	seaVAO.nVertexs = 0;
-	std::vector <double> vertices, normals, colors, textures;	// Definició vectors dinàmics per a vertexs, normals i textures 
+	std::vector <double> vertices, normals, colors, textures;	// DefiniciÃ³ vectors dinÃ mics per a vertexs, normals i textures 
 	vertices.resize(0);		normals.resize(0);		colors.resize(0);	textures.resize(0);			// Reinicialitzar vectors
 
 // Aigua amb ondulacions simulades a partir de normals sinusoidals
@@ -570,7 +570,7 @@ CVAO loadSea_VAO(CColor colorM)
 			  angle = 1.0*it2*h * 15;
 			  Nx = -cos(angle);
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i, j, 0);			// Vèrtex P1
+			  //glVertex3f(i, j, 0);			// VÃ¨rtex P1
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(Nx);			normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(0.0);			textures.push_back(0.0);										// Vector Textures
@@ -579,7 +579,7 @@ CVAO loadSea_VAO(CColor colorM)
 			  angle = 1.0*(it2 + 1.0)*h * 15;
 			  Nx = -cos(angle);
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i + step, j, 0);		// Vèrtex P2
+			  //glVertex3f(i + step, j, 0);		// VÃ¨rtex P2
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(Nx);			normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(1.0);			textures.push_back(0.0);										// Vector Textures
@@ -588,7 +588,7 @@ CVAO loadSea_VAO(CColor colorM)
 			  angle = 1.0*(it2 + 1.0)*h * 15;
 			  Nx = -cos(angle);
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i + step, j + step, 0);// Vèrtex P3
+			  //glVertex3f(i + step, j + step, 0);// VÃ¨rtex P3
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(Nx);			normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(1.0);			textures.push_back(1.0);										// Vector Textures
@@ -603,7 +603,7 @@ CVAO loadSea_VAO(CColor colorM)
 			//glBegin(GL_POLYGON);
 			  angle = 1.0*it2*h * 15;
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i, j, 0);			// Vèrtex P1
+			  //glVertex3f(i, j, 0);			// VÃ¨rtex P1
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(-cos(angle));	normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(1.0);			textures.push_back(1.0);										// Vector Textures
@@ -611,7 +611,7 @@ CVAO loadSea_VAO(CColor colorM)
 
 			  angle = 1.0*(it2 + 1)*h * 15;
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i + step, j + step, 0);// Vèrtex P2
+			  //glVertex3f(i + step, j + step, 0);// VÃ¨rtex P2
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(-cos(angle));	normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(1.0);			textures.push_back(1.0);										// Vector Textures
@@ -619,7 +619,7 @@ CVAO loadSea_VAO(CColor colorM)
 
 			  angle = 1.0*it2*h * 15;
 			  //glNormal3f(-cos(angle), 0, 1);
-			  //glVertex3f(i, j + step, 0);		// Vèrtex P3
+			  //glVertex3f(i, j + step, 0);		// VÃ¨rtex P3
 			  colors.push_back(colorM.r);		colors.push_back(colorM.g);		colors.push_back(colorM.b);		colors.push_back(colorM.a);  // Vector Colors
 			  normals.push_back(-cos(angle));	normals.push_back(0.0);			normals.push_back(1.0);			// Vector Normals
 			  textures.push_back(0.0);			textures.push_back(1.0);										// Vector Textures
@@ -634,7 +634,7 @@ CVAO loadSea_VAO(CColor colorM)
 // ----------------------- VAO
 	std::vector <int>::size_type nv = vertices.size();	// Tamany del vector vertices en elements.
 
-// Creació d'un VAO i un VBO i càrrega de la geometria. Guardar identificador VAO identificador VBO a struct CVAO.
+// CreaciÃ³ d'un VAO i un VBO i cÃ rrega de la geometria. Guardar identificador VAO identificador VBO a struct CVAO.
 	seaVAO = load_TRIANGLES_VAO(vertices, normals, colors, textures);
 
 	seaVAO.nVertexs = (int)nv / 3;
@@ -649,22 +649,22 @@ void tie(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[
 {	Motor(shaderId,MatriuVista,MatriuTG, sw_mat);
 	Alas(shaderId, MatriuVista, MatriuTG, sw_mat);
 	Canon(shaderId, MatriuVista, MatriuTG, sw_mat);
-// Activar transparència
+// Activar transparÃ¨ncia
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		Cuerpo(shaderId, MatriuVista, MatriuTG, sw_mat);
 		Cabina(shaderId, MatriuVista, MatriuTG, sw_mat);
-// Desactivar transparència
+// Desactivar transparÃ¨ncia
 	glDisable(GL_BLEND);
 };
 
 void Alas(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
 {
-// Matrius Transformació
+// Matrius TransformaciÃ³
 	glm::mat4 TransMatrix(1.0), ModelMatrix(1.0), NormalMatrix(1.0);
 	CColor col_object;
 	
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 1.0;	col_object.g = 1.0;		col_object.b = 1.0;	 col_object.a = 1.0;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 
@@ -674,7 +674,7 @@ void Alas(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat
 //Parte Exterior
 	//glPushMatrix();
 	  //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	  col_object.r = 1.0;	col_object.g = 1.0;		col_object.b = 1.0;	 col_object.a = 1.0;
 	  SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	  //glTranslatef(25.25f, 0.0f, 0.0f);
@@ -731,7 +731,7 @@ void Alas(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat
 	//glPushMatrix();
 	  //glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
 	  SetColor4d(0.0, 0.0, 0.0, 1.0);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	  col_object.r = 0.0;	col_object.g = 0.0;		col_object.b = 0.0;	 col_object.a = 1.0;
 	  SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	  //glTranslated(25.25f, 0.0f, 0.0f);
@@ -841,7 +841,7 @@ void Alas(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat
 	//glPushMatrix();
 	  //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	  SetColor4d(1.0, 1.0, 1.0, 1.0);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	  col_object.r = 1.0;	col_object.g = 1.0;		col_object.b = 1.0;	 col_object.a = 1.0;
 	  SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	  //glTranslated(-27.75f, 0.0f, 0.0f);
@@ -896,7 +896,7 @@ void Alas(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat
 //Parte Interior
 	//glPushMatrix();
 	  //glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
-	  // Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+	  // DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	  col_object.r = 0.0;	col_object.g = 0.0;		col_object.b = 0.0;	 col_object.a = 1.0;
 	  SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	  //glTranslatef(-29.25f, 0.0f, 0.0f);
@@ -1016,7 +1016,7 @@ void Motor(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 	int j;
 	//glPushMatrix();
 	  //glColor4f(0.58f, 0.58f, 0.58f, 0.0f);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	  col_object.r = 0.58;	col_object.g = 0.58;	col_object.b = 0.58;	 col_object.a = 1.0;
 	  SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	  //glTranslatef(0.0f, -18.0f, 0.0f);
@@ -1046,7 +1046,7 @@ void Motor(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 //Soporte Motor
 	//glPushMatrix();
 	//glColor4f(0.28f, 0.28f, 0.28f, 0.0f);
-	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 0.28;	col_object.g = 0.28;	col_object.b = 0.28;	 col_object.a = 1.0;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	//glTranslatef(0.0f, -18.0f, 0.0f);
@@ -1066,16 +1066,16 @@ void Motor(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 
 void Canon(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
 {
-// Matrius Transformació
+// Matrius TransformaciÃ³
 	glm::mat4 TransMatrix(1.0), ModelMatrix(1.0), NormalMatrix(1.0);
 	CColor col_object;
 
-//Cañones
+//CaÃ±ones
 
-// Salida cañon 1
+// Salida caÃ±on 1
 	//glPushMatrix();
 		//glColor4d(0.28, 0.28, 0.28, 0.0);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 0.28;	col_object.g = 0.28;	col_object.b = 0.28;	 col_object.a = 1.0;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	//glTranslated(5.0, 8.0, -10.0);
@@ -1090,7 +1090,7 @@ void Canon(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 	draw_TriEBO_Object(GLUT_USER2); //gluCylinder(1.0f, 0.5f, 5.0f, 60, 1);
 	//glPopMatrix();
 
-// Salida cañon 2
+// Salida caÃ±on 2
 	//glPushMatrix();
 	//glColor4d(0.28, 0.28, 0.28, 0.0);
 	//glTranslated(-5.0, 8.0, -10.0);
@@ -1105,10 +1105,10 @@ void Canon(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 	draw_TriEBO_Object(GLUT_USER2); // gluCylinder(1.0f, 0.5f, 5.0f, 60, 1);
 	//glPopMatrix();
 
-// Cañon 1
+// CaÃ±on 1
 	//glPushMatrix();
 		//glColor4d(0.58, 0.58, 0.58, 0.0);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 0.58;	col_object.g = 0.58;		col_object.b = 0.58;	 col_object.a = 1.0;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	//glTranslated(5.0, 10.0, -10.0);
@@ -1123,7 +1123,7 @@ void Canon(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 	draw_TriEBO_Object(GLUT_USER3); // gluCylinder(0.35f, 0.35f, 5.0f, 80, 1);
 	//glPopMatrix();
 
-//Cañon 2
+//CaÃ±on 2
 	//glPushMatrix();
 	//glColor4d(0.58, 0.58, 0.58, 1.0);
  	//glTranslated(-5.0, 10.0, -10.0);
@@ -1141,7 +1141,7 @@ void Canon(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_ma
 
 void Cuerpo(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
 {
-// Matrius Transformació
+// Matrius TransformaciÃ³
 	glm::mat4 TransMatrix(1.0), ModelMatrix(1.0), NormalMatrix(1.0);
 	CColor col_object;
 
@@ -1150,7 +1150,7 @@ void Cuerpo(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_m
 //Lado2
 	//glPushMatrix();
 	//glColor4d(0.16, 0.16, 0.16, 1.0);
-// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 0.16;	col_object.g = 0.16;	col_object.b = 0.16;	 col_object.a = 0.5;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	//glRotated(-90.0, 0.0, 1.0, 0.0);
@@ -1233,14 +1233,14 @@ void Cuerpo(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_m
 
 void Cabina(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
 {
-// Matrius Transformació
+// Matrius TransformaciÃ³
 	glm::mat4 TransMatrix(1.0), ModelMatrix(1.0), NormalMatrix(1.0);
 	CColor col_object;
 
 // Tapa Cabina
 	//glPushMatrix();
 	//glColor4d(1.0, 0.058, 0.058, 0.5);
-	// Definició propietats de reflexió (emissió, ambient, difusa, especular) del material.
+	// DefiniciÃ³ propietats de reflexiÃ³ (emissiÃ³, ambient, difusa, especular) del material.
 	col_object.r = 1.0;	col_object.g = 0.058;	col_object.b = 0.058;	 col_object.a = 0.5;
 	SeleccionaColorMaterial(shaderId, col_object, sw_mat);
 	//glTranslated(0.0, 19.45, 0.0);
@@ -1279,21 +1279,21 @@ void Cabina(GLint shaderId, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_m
 	//glPopMatrix();
 }
 // -----------------------------------------------------------------------------
-//  Objecte CAMIÓ: cos, cabina i quatre rodes. S'assumeix que el pla Z=0 és el terra.
+//  Objecte CAMIÃ“: cos, cabina i quatre rodes. S'assumeix que el pla Z=0 Ã©s el terra.
 // -----------------------------------------------------------------------------
 void camio(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool sw_mat[5])
 {
 	CColor col_object;
 	glm::mat4 NormalMatrix(1.0f), ModelMatrix(1.0f);
 
-	// 1. Cos del camió (paral·lelepípede 5×2×2 de color gris)
-	//    L’eix Y és el llargada, l’eix X l’amplada, i l’eix Z l’alçada.
+	// 1. Cos del camiÃ³ (paralÂ·lelepÃ­pede 5Ã—2Ã—2 de color gris)
+	//    Lâ€™eix Y Ã©s el llargada, lâ€™eix X lâ€™amplada, i lâ€™eix Z lâ€™alÃ§ada.
 	col_object.r = 0.5f; col_object.g = 0.5f; col_object.b = 0.5f; col_object.a = 1.0f;
 	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 
-	// Translació: elevem el cos a la meitat de l’alçada de les rodes (0.1) + meitat de l’alçada (2/2 = 1.0) = 1.1.
-	// Escalat: (amplada, llargada, alçada) = (2, 5, 2).
-	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, 0.55f)); // 1.1/2 perquè després multiplicarem per l’escalat
+	// TranslaciÃ³: elevem el cos a la meitat de lâ€™alÃ§ada de les rodes (0.1) + meitat de lâ€™alÃ§ada (2/2 = 1.0) = 1.1.
+	// Escalat: (amplada, llargada, alÃ§ada) = (2, 5, 2).
+	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, 0.55f)); // 1.1/2 perquÃ¨ desprÃ©s multiplicarem per lâ€™escalat
 	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(2.0f, 5.0f, 2.0f));
 	// Enviem matrices al shader
 	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
@@ -1305,9 +1305,9 @@ void camio(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool 
 	col_object.r = 0.0f; col_object.g = 0.7f; col_object.b = 0.7f; col_object.a = 1.0f;
 	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 
-	// Translació: col·loquem la cabina davant del cos (+3 en Y, que és 2.5 + 0.5) i a 0.5 en Z per posar-la sobre el terra.
+	// TranslaciÃ³: colÂ·loquem la cabina davant del cos (+3 en Y, que Ã©s 2.5 + 0.5) i a 0.5 en Z per posar-la sobre el terra.
 	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 3.0f, 0.5f));
-	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.0f, 1.0f, 1.0f)); // Cub de 1×1×1
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1.0f, 1.0f, 1.0f)); // Cub de 1Ã—1Ã—1
 	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
 	NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
 	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
@@ -1326,9 +1326,9 @@ void camio(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, bool 
 	};
 	for (int i = 0; i < 4; i++)
 	{
-		// Situem la roda a la seva posició XY. L’altura és z=0 (toca el terra).
+		// Situem la roda a la seva posiciÃ³ XY. Lâ€™altura Ã©s z=0 (toca el terra).
 		ModelMatrix = glm::translate(MatriuTG, glm::vec3(rodaPos[i][0], rodaPos[i][1], 0.0f));
-		// IMPORTANT: aquí no fem escalat perquè el radi s’especifica a l’EBO; tampoc rotem el torus (acceptem rodes “plans”)
+		// IMPORTANT: aquÃ­ no fem escalat perquÃ¨ el radi sâ€™especifica a lâ€™EBO; tampoc rotem el torus (acceptem rodes â€œplansâ€)
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
 		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
 		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
@@ -1341,13 +1341,13 @@ void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, boo
 	glm::mat4 NormalMatrix(1.0f), ModelMatrix(1.0f);
 
 	// Dimensions principals de l'Octopus
-	const float baseHeight = 1.0f;   // Alçada de la base (cilindre amb tapes)
+	const float baseHeight = 1.0f;   // AlÃ§ada de la base (cilindre amb tapes)
 	const float baseRadius = 2.0f;   // Radi de la base
-	const float pillarHeight = 2.0f;   // Alçada del pilar
+	const float pillarHeight = 2.0f;   // AlÃ§ada del pilar
 	const float pillarRadius = 1.0f;   // Radi del pilar
 	const float rotorRadius = 5.0f;   // Radi de l'esfera central
-	const float armLength = 20.0f;  // Longitud de cada braç
-	const float armRadius = 0.5f;   // Radi dels braços
+	const float armLength = 20.0f;  // Longitud de cada braÃ§
+	const float armRadius = 0.5f;   // Radi dels braÃ§os
 	const float cabinRadiusX = 3.0f;   // Radi de la cabina en X
 	const float cabinRadiusY = 3.0f;   // Radi de la cabina en el sentit radial
 	const float cabinRadiusZ = 0.75f;  // Radi vertical de la cabina (altura 1.5)
@@ -1355,10 +1355,10 @@ void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, boo
 	const float bubbleRadiusY = 2.0f;   // Radi de la bombolla en el sentit radial
 	const float bubbleRadiusZ = 0.5f;   // Radi vertical de la bombolla (altura 1.0)
 
-	// Alçada del centre del rotor
+	// AlÃ§ada del centre del rotor
 	const float rotorCenterZ = baseHeight + pillarHeight + rotorRadius;
 
-	// Colors per als vuit braços (RGB)
+	// Colors per als vuit braÃ§os (RGB)
 	const float armColors[8][3] = {
 		{1.0f, 0.0f, 0.0f},   // Vermell
 		{1.0f, 0.5f, 0.0f},   // Taronja
@@ -1370,7 +1370,7 @@ void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, boo
 		{0.5f, 0.0f, 1.0f}    // Lila
 	};
 
-	// 1. Base de l'atracció (cilindre amb tapes)
+	// 1. Base de l'atracciÃ³ (cilindre amb tapes)
 	col_object.r = col_object.g = col_object.b = 0.5f; col_object.a = 1.0f;
 	SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
 	ModelMatrix = glm::translate(MatriuTG, glm::vec3(0.0f, 0.0f, baseHeight / 2.0f));
@@ -1398,24 +1398,41 @@ void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, boo
 	glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
 	draw_TriEBO_Object(GLU_SPHERE);
 
-	// 4. Dibuix dels 8 braços
+	// 4. Dibuix dels 8 braÃ§os
 	for (int i = 0; i < 8; ++i)
 	{
 		float ang = static_cast<float>(i) * (TWOPI / 8.0f);
-		// color del braç i cabina
+		// color del braÃ§ i cabina
 		col_object.r = armColors[i][0]; col_object.g = armColors[i][1]; col_object.b = armColors[i][2]; col_object.a = 1.0f;
-		// Braç (cilindre)
-		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
+		// BraÃ§ (cilindre)
+		// BraÃ§ (cilindre)
+		// Calcula la posiciÃ³ del centre del braÃ§ (igual que en tu cÃ³digo actual)
 		float dxArm = cos(ang) * (rotorRadius + armLength / 2.0f);
 		float dyArm = sin(ang) * (rotorRadius + armLength / 2.0f);
+
+		// 1) Trasladar el braÃ§ a la seva posiciÃ³
 		ModelMatrix = glm::translate(MatriuTG, glm::vec3(dxArm, dyArm, rotorCenterZ));
+
+		// 2) Girar al voltant de Z per distribuir els 8 braÃ§os
 		ModelMatrix = glm::rotate(ModelMatrix, ang, glm::vec3(0.0f, 0.0f, 1.0f));
-		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		ModelMatrix = glm::scale(ModelMatrix, glm::vec3(armRadius, armRadius, armLength));
-		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"), 1, GL_FALSE, &ModelMatrix[0][0]);
+
+		// 3) Girar âˆ’90Â° sobre Y perquÃ¨ lâ€™eix Z del cilindre passi a lâ€™eix X
+		//    (el braÃ§ quedarÃ  alineat amb el radi en el pla Xâ€‘Y).
+		ModelMatrix = glm::rotate(ModelMatrix, glm::radians(-90.0f),
+			glm::vec3(0.0f, 1.0f, 0.0f));
+
+		// 4) Escalar: radi i longitud del cilindre
+		ModelMatrix = glm::scale(ModelMatrix,
+			glm::vec3(armRadius, armRadius, armLength));
+
+		// Passa la matriu als uniform corresponents, calcula la normal i dibuixa el cilindre:
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "modelMatrix"),
+			1, GL_FALSE, &ModelMatrix[0][0]);
 		NormalMatrix = glm::transpose(glm::inverse(MatriuVista * ModelMatrix));
-		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"), 1, GL_FALSE, &NormalMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(sh_programID, "normalMatrix"),
+			1, GL_FALSE, &NormalMatrix[0][0]);
 		draw_TriEBO_Object(GLU_CYLINDER);
+
 
 		// Cabina (esfera escalada)
 		SeleccionaColorMaterial(sh_programID, col_object, sw_mat);
