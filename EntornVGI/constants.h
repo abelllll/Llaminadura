@@ -31,7 +31,7 @@
 
 //-------------- VGI: Tipus d'Objectes
 #define ARC 'a'
-#define CAMIO '5'
+#define CAMIO 'k'
 #define CILINDRE 'y'
 #define CUB 'c'
 #define CUB_RGB 'd'
