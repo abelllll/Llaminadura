@@ -100,7 +100,7 @@
 #define ID_ARXIU_OBRIR_FITXER_OBJ       32772
 #define ID_Menu                         32774
 #define ID_VISTA_Mobil                  32775
-#define ID_OBJECTE_CAMIO                32775
+#define ID_OBJECTE_CAMIO                32910
 #define ID_VISTA_ZOOM                   32776
 #define ID_VISTA_POLARSEIXX             32777
 #define ID_VISTA_POLARS_X               32778
