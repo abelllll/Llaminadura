@@ -153,6 +153,10 @@ void dibuixa_EscenaGL(GLuint sh_programID, bool eix, GLuint axis_Id, CMask3D rei
 		tie(sh_programID, MatriuVista, MatriuTG, sw_mat);
 		break;
 
+	case CAMIO:
+		camio(sh_programID, MatriuVista, MatriuTG, sw_mat);
+		break;
+
 // Dibuix de l'objecte OBJ
 	case OBJOBJ:
 		ModelMatrix = MatriuTG;
@@ -438,9 +442,7 @@ void dibuixa(GLuint sh_programID, char obj, glm::mat4 MatriuVista, glm::mat4 Mat
 		draw_TriEBO_Object(GLUT_CUBE_RGB);	//draw_TriVAO_Object(GLUT_CUBE_RGB); // glutSolidCubeRGB(1.0);
 		break;
 
-	case CAMIO:
-		camio(sh_programID, MatriuVista, MatriuTG, sw_mat);
-		break;
+	
 
 // Esfera
 	case ESFERA:	
