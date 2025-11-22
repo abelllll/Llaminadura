@@ -1407,8 +1407,8 @@ void octopus(GLuint sh_programID, glm::mat4 MatriuVista, glm::mat4 MatriuTG, boo
 		// Braç (cilindre)
 		// Braç (cilindre)
 		// Calcula la posició del centre del braç (igual que en tu código actual)
-		float dxArm = cos(ang) * (rotorRadius + armLength / 2.0f);
-		float dyArm = sin(ang) * (rotorRadius + armLength / 2.0f);
+		float dxArm = cos(ang) * (rotorRadius + armLength);
+		float dyArm = sin(ang) * (rotorRadius + armLength);
 
 		// 1) Trasladar el braç a la seva posició
 		ModelMatrix = glm::translate(MatriuTG, glm::vec3(dxArm, dyArm, rotorCenterZ));
